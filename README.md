@@ -4,7 +4,7 @@ author: "André Matutat"
 lang: de-DE
 ...
 
-![test](https://github.com/CrappyAlgorithm/docs/actions/workflows/maven.yml/badge.svg)
+![test](https://github.com/CrappyAlgorithm/pmdungeon/actions/workflows/maven.yml/badge.svg?branch=setup-ghactions)
 
 ## Einleitung
 
