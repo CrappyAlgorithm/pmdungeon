@@ -27,4 +27,5 @@ jobs:
       uses: cicirello/jacoco-badge-generator@v2.2.1
       with:
         generate-coverage-badge: true
+        generate-branches-badge: true
         jacoco-csv-file: core/target/site/jacoco/jacoco.csv
