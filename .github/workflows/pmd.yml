@@ -1,0 +1,28 @@
+name: pmd
+
+on:
+  push:
+    branches: [ setup-ghactions ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: Check with PMD
+      run: mvn -B pmd:pmd --file pom.xml
+      
+    - name: Upload JaCoCo coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: pmd-report
+        path: core/target/site/pmd.html
