@@ -42,3 +42,9 @@ jobs:
       with:
         name: jacoco-report
         path: core/target/site/jacoco/
+
+    - name: Upload jar with dependencys
+      uses: actions/upload-artifact@v2
+      with:
+        name: pmdungeon
+        path: desktop/target/pmdungeon-desktop-jar-with-dependencies.jar
