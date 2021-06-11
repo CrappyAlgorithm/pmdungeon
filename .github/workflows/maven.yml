@@ -21,5 +21,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: jacoco-badge-generator
+      uses: cicirello/jacoco-badge-generator@v2.2.1
     - name: Build with Maven
       run: mvn -B package --file pom.xml
