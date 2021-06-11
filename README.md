@@ -5,7 +5,9 @@ lang: de-DE
 ...
 
 ![test](https://github.com/CrappyAlgorithm/pmdungeon/actions/workflows/maven.yml/badge.svg?branch=setup-ghactions)
-[![Coverage](.github/badges/jacoco.svg)](https://github.com/CrappyAlgorithm/pmdungeon/actions/workflows/maven.yml/badge.svg?branch=setup-ghactions)
+
+![Coverage](.github/badges/jacoco.svg)
+
 
 ## Einleitung
 
