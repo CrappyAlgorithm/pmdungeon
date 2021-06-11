@@ -25,7 +25,7 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: Check with PMD
-      run: mvn -B pmd:pmd --file pom.xml
+      run: mvn pmd:pmd --file pom.xml
       
     - name: jacoco-badge-generator
       uses: cicirello/jacoco-badge-generator@v2.2.1
