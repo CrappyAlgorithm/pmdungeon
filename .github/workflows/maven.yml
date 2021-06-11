@@ -5,7 +5,7 @@ name: maven build
 
 on:
   push:
-    branches: [ setup-ghactions ]
+    branches: [ setup-ghactions, unit-test-creation ]
   pull_request:
     branches: [ master ]
 
