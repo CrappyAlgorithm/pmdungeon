@@ -23,6 +23,10 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      
+    - name: Check with PMD
+      run: mvn -B pmd:pmd --file pom.xml
+      
     - name: jacoco-badge-generator
       uses: cicirello/jacoco-badge-generator@v2.2.1
       with:
@@ -42,6 +46,12 @@ jobs:
       with:
         name: jacoco-report
         path: core/target/site/jacoco/
+
+    - name: Upload PMD report
+      uses: actions/upload-artifact@v2
+      with:
+        name: pmd-report
+        path: core/target/site/pmd.html
 
     - name: Upload jar with dependencys
       uses: actions/upload-artifact@v2
