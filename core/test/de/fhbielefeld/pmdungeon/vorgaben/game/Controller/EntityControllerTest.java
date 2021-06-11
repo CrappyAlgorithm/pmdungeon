@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 
-public class EntityController {
+public class EntityControllerTest {
 
 
     @Test
