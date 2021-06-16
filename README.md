@@ -6,6 +6,7 @@ lang: de-DE
 
 ![test](https://github.com/CrappyAlgorithm/pmdungeon/actions/workflows/maven.yml/badge.svg?branch=unit-test-creation)
 ![Coverage](.github/badges/jacoco.svg)
+![Branches](.github/badges/branches.svg)
 ## Einleitung
 
 Dieses Dokument liefert einen Einstieg in das PM-Dungeon. Es erläutert die Installation der API und erläutert Ihnen die ersten Schritte, um eigene Inhalte zum Dungeon hinzuzufügen. Es dient als Grundlage für alle weiteren Praktika. Lesen Sie das Dokument daher aufmerksam durch und versuchen Sie sich zusätzlich selbst mit dem Aufbau vertraut zu machen.
