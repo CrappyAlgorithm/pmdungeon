@@ -1,51 +1,57 @@
 package de.fhbielefeld.pmdungeon.vorgaben.graphic;
 
 
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import de.fhbielefeld.pmdungeon.vorgaben.graphic.Animation;
-import de.fhbielefeld.pmdungeon.vorgaben.graphic.HUD;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.fhbielefeld.pmdungeon.vorgaben.interfaces.IHUDElement;
 import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
+import org.junit.Before;
 import org.junit.Test;
-import org.mockito.MockedConstruction;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.mockito.Mockito.doCallRealMethod;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 
 public class HUDTest{
-
+    HUD hud;
+    @Before
+    public void setup(){
+        this.hud = new HUD(mock(SpriteBatch.class),mock(OrthographicCamera.class),new ArrayList());
+    }
+    //ID=25
     @Test
     public void testCreateHUD() {
-        HUD hud = new HUD();
+
         assertNotEquals(hud.getHudBatch(),null);
         assertNotEquals(hud.hudCamera,null);
         assertNotEquals(hud.hudElements,null);
     }
 
+    //ID=26.1
     @Test
     public void testUsePixelSystemTrue() {
-        HUD hud = new HUD();
+
         hud.usePixelSystem(true);
         assertEquals(hud.usePixelSystem,true);
     }
 
+    //ID=26.2
     @Test
     public void testUsePixelSystemFalse() {
-        HUD hud = new HUD();
+
         hud.usePixelSystem(false);
         assertEquals(hud.usePixelSystem,false);
     }
 
+    //ID=27.1
     @Test
     public void testAddHudElement() {
-        HUD hud = new HUD();
+
         hud.addHudElement(new IHUDElement() {
             @Override
             public Point getPosition() {
@@ -57,48 +63,22 @@ public class HUDTest{
                 return null;
             }
         });
-        assertEquals(hud.hudElements.size(),1);
+
+        assertEquals(1,hud.hudElements.size());
     }
 
+    //ID=27.2
     @Test
     public void testAddHudElementNull() {
-        HUD hud = new HUD();
-        hud.addHudElement(new IHUDElement() {
-            @Override
-            public Point getPosition() {
-                return null;
-            }
 
-            @Override
-            public Texture getTexture() {
-                return null;
-            }
-        });
-        assertEquals(hud.hudElements.size(),0);
+        hud.addHudElement(null);
+        assertEquals(1,hud.hudElements.size());
     }
 
-    @Test
-    public void testRemoveHudElementNull() {
-        HUD hud = new HUD();
-        IHUDElement element=new IHUDElement() {
-            @Override
-            public Point getPosition() {
-                return null;
-            }
-
-            @Override
-            public Texture getTexture() {
-                return null;
-            }
-        };
-        hud.addHudElement(element);
-        hud.removeHudElement(null);
-        assertEquals(hud.hudElements.contains(element),true);
-    }
-
+    //ID=28.1
     @Test
     public void testRemoveHudElement() {
-        HUD hud = new HUD();
+
         IHUDElement element=new IHUDElement() {
             @Override
             public Point getPosition() {
@@ -115,11 +95,33 @@ public class HUDTest{
         assertEquals(hud.hudElements.contains(element),false);
     }
 
-//    @Test
-//    public void testDraw() {
-//        MockedConstruction<HUD> mhud = (MockedConstruction<HUD>) Mockito.mockConstruction(HUD.class);
-//
-//        mHud.hudCamera=mock(OrthographicCamera.class);
-//        doCallRealMethod().when( mHud).draw();
-//    }
+    //ID=28.2
+    @Test
+    public void testRemoveHudElementNull() {
+
+        IHUDElement element=new IHUDElement() {
+            @Override
+            public Point getPosition() {
+                return null;
+            }
+
+            @Override
+            public Texture getTexture() {
+                return null;
+            }
+        };
+        hud.addHudElement(element);
+        hud.removeHudElement(null);
+        assertEquals(hud.hudElements.contains(element),true);
+    }
+
+
+    //ID=29.1
+    /*
+    @Test
+    public void testDraw() {
+        OrthographicCamera mCamera=mock(OrthographicCamera.class);
+        HUD mhud= (HUD) mockConstruction(HUD.class,(hud, context) -> {context.constructor()});
+        verify(mHUD)
+    }*/
 }
