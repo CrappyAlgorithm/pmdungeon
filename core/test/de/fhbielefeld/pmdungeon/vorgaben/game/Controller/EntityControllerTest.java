@@ -40,14 +40,14 @@ public class EntityControllerTest {
 
     // 1.1
     @Test
-    public void KonstruktorTest() {
+    public void TestKonstruktor() {
         List<IEntity> entities = entityController.getList();
         assertEquals(true, entities.isEmpty());
     }
 
     // 2.1
     @Test
-    public void addEntityTest() {
+    public void TestAddEntity() {
         entityController.addEntity(entity1);
         List<IEntity> entities = entityController.getList();
         assertEquals(1, entities.size());
@@ -56,7 +56,7 @@ public class EntityControllerTest {
 
     // 2.2
     @Test
-    public void addEntityWithNullTest() {
+    public void TestAddEntityWithNull() {
         entityController.addEntity(entity1);
         entityController.addEntity(null);
         List<IEntity> entities = entityController.getList();
@@ -65,7 +65,7 @@ public class EntityControllerTest {
 
     // 2.3
     @Test
-    public void addEntityTwiceTest() {
+    public void TestAddEntityTwice() {
         entityController.addEntity(entity1);
         entityController.addEntity(entity1);
         List<IEntity> entities = entityController.getList();
@@ -74,7 +74,7 @@ public class EntityControllerTest {
 
     // 3.1
     @Test
-    public void removeEntityTest() {
+    public void TestRemoveEntity() {
         entityController.addEntity(entity1);
         entityController.addEntity(entity2);
         entityController.removeEntity(entity2);
@@ -85,7 +85,7 @@ public class EntityControllerTest {
 
     // 3.2
     @Test
-    public void removeEntityNotInsideTest() {
+    public void TestRemoveEntityNotInside() {
         entityController.addEntity(entity1);
         entityController.removeEntity(entity2);
         List<IEntity> entities = entityController.getList();
@@ -95,7 +95,7 @@ public class EntityControllerTest {
 
     // 3.3
     @Test
-    public void removeEntityWithNullTest() {
+    public void TestRemoveEntityWithNull() {
         entityController.addEntity(entity1);
         entityController.addEntity(entity2);
         entityController.removeEntity(null);
@@ -107,7 +107,7 @@ public class EntityControllerTest {
 
     // 4.1
     @Test
-    public void removeAllTest() {
+    public void TestRemoveAll() {
         entityController.addEntity(entity1);
         entityController.addEntity(entity2);
         entityController.removeAll();
@@ -117,7 +117,7 @@ public class EntityControllerTest {
 
     // 5.1
     @Test
-    public void removeAllFromTest() {
+    public void TestRemoveAllFrom() {
         entityController.addEntity(entity1);
         entityController.addEntity(entity2);
         entityController.removeAllFrom(entity1.getClass());
@@ -128,7 +128,7 @@ public class EntityControllerTest {
 
     // 5.2
     @Test
-    public void removeAllFromNotInsideTest() {
+    public void TestRemoveAllFromNotInside() {
         entityController.addEntity(entity1);
         entityController.removeAllFrom(entity2.getClass());
         List<IEntity> entities = entityController.getList();
@@ -138,7 +138,7 @@ public class EntityControllerTest {
 
     // 5.3
     @Test(expected=NullPointerException.class)
-    public void removeAllFromWithNullTest() {
+    public void TestRemoveAllFromWithNull() {
         entityController.addEntity(entity1);
         entityController.addEntity(entity2);
         entityController.removeAllFrom(null);
