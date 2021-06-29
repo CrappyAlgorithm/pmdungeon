@@ -40,7 +40,7 @@ public class EntityControllerTest {
 
     // 1.1
     @Test
-    public void TestKonstruktor() {
+    public void TestConstruktor() {
         List<IEntity> entities = entityController.getList();
         assertEquals(true, entities.isEmpty());
     }
