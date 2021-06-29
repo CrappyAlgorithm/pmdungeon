@@ -18,15 +18,15 @@ public class LevelController {
     /**
      * Method to call after a new level is loaded
      */
-    private final Method onLevelLoad;
+    protected final Method onLevelLoad;
     /**
      * Instance of the class that contains onLevelLoad (should be MainGameController)
      */
-    private final Object klass;
+    protected final Object klass;
     /**
      * Arguments for onLevelLoad
      */
-    private final Object[] args;
+    protected final Object[] args;
     /**
      * the converter that generates the dungeon out of a json
      */
@@ -34,15 +34,15 @@ public class LevelController {
     /**
      * if this is true, the next level will get load
      */
-    private boolean nextLevelTriggered = false;
+    protected boolean nextLevelTriggered = false;
     /**
      * the current level
      */
-    private DungeonWorld dungeonWorld;
+    protected DungeonWorld dungeonWorld;
     /**
      * the next level
      */
-    private Stage nextStage = Stage.A;
+    protected Stage nextStage = Stage.A;
 
 
     /**
@@ -127,7 +127,7 @@ public class LevelController {
     /**
      * If next stage is triggered, change the dungeon.
      */
-    private void nextStage() throws InvocationTargetException, IllegalAccessException {
+    protected void nextStage() throws InvocationTargetException, IllegalAccessException {
         switch (nextStage) {
             case A:
                 loadDungeon(dungeonConverter.dungeonFromJson(Constants.PATHTOLEVEL + "small_dungeon.json"));
