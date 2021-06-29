@@ -17,9 +17,9 @@ import java.util.List;
  */
 public class HUD {
     private final SpriteBatch hudBatch;
-    private final OrthographicCamera hudCamera;
-    private final List<IHUDElement> hudElements;
-    private boolean usePixelSystem = false;
+    protected final OrthographicCamera hudCamera;
+    protected final List<IHUDElement> hudElements;
+    protected boolean usePixelSystem = false;
 
     public HUD() {
         hudBatch = new SpriteBatch();
