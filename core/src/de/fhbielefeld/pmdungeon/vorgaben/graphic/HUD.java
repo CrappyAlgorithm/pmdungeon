@@ -80,7 +80,7 @@ public class HUD {
     /**
      * Draws all the elements
      */
-    private void drawElements() {
+    protected void drawElements() {
         for (IHUDElement element : hudElements) {
             Texture texture = element.getTexture();
             Sprite sprite = new Sprite(texture);
