@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-18.04, ubuntu-latest]
-        node: ['11', '14']
+        java: ['11', '14']
 
     steps:
     - uses: actions/checkout@v2
@@ -32,6 +32,7 @@ jobs:
       run: mvn pmd:pmd --file pom.xml
       
     - name: jacoco-badge-generator
+      if: runner.os == 'ubuntu-latest'
       uses: cicirello/jacoco-badge-generator@v2.2.1
       with:
         generate-coverage-badge: true
