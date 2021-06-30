@@ -49,7 +49,7 @@ public class MainController extends ScreenAdapter {
     protected boolean firstFrame = true;
 
     //if you call a gdx function in setup this will call draw, so this boolean will be used to stop loops of firstFrame
-    private boolean finishedSetup = false;
+    protected boolean finishedSetup = false;
 
     //----------------------------- OWN IMPLEMENTATION -----------------------------
     protected void setup() {
@@ -69,7 +69,7 @@ public class MainController extends ScreenAdapter {
     /**
      * Setup for the MainController
      */
-    private void firstFrame() {
+    protected void firstFrame() {
         if (!finishedSetup) {
             this.entityController = new EntityController();
             this.hud = new HUD();
@@ -138,7 +138,7 @@ public class MainController extends ScreenAdapter {
     /**
      * Setting up the WorldController.
      */
-    private void setupWorldController() {
+    protected void setupWorldController() {
         try {
             //this method will be called every time a new level gets load
             Method functionToPass = this.getClass().getMethod("onLevelLoad");
@@ -154,7 +154,7 @@ public class MainController extends ScreenAdapter {
     /**
      * Setting up the camera.
      */
-    private void setupCamera() {
+    protected void setupCamera() {
         camera = new DungeonCamera(null, Constants.VIRTUALHEIGHT * Constants.WIDTH / (float) Constants.HEIGHT, Constants.VIRTUALHEIGHT);
         camera.position.set(0, 0, 0);
         camera.zoom += 1;
