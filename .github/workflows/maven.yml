@@ -11,8 +11,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-18.04, ubuntu-latest]
-
+        os: [ubuntu-18.04, ubuntu-latest, windows-2019, windows-latest, macos-10.15, macos-latest]
+        
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -24,7 +24,7 @@ jobs:
       run: mvn -B install --file pom.xml
       
     - name: Check with PMD
-      if: runner.os == 'ubuntu-latest'
+      if: matrix.os == 'ubuntu-latest'
       run: mvn pmd:pmd --file pom.xml
       
     - name: jacoco-badge-generator
@@ -57,8 +57,23 @@ jobs:
         name: pmd-report
         path: core/target/site/pmd.html
 
-    - name: Upload jar with dependencys
+    - name: Upload jar with dependencys ubuntu
+      if: matrix.os == 'ubuntu-latest'
       uses: actions/upload-artifact@v2
       with:
-        name: format('pmdungeon-{0}', matrix.os)
+        name: pmdungeon-ubuntu
+        path: desktop/target/pmdungeon-desktop-jar-with-dependencies.jar
+
+    - name: Upload jar with dependencys windows
+      if: matrix.os == 'windows-latest'
+      uses: actions/upload-artifact@v2
+      with:
+        name: pmdungeon-windows
+        path: desktop/target/pmdungeon-desktop-jar-with-dependencies.jar
+
+    - name: Upload jar with dependencys macos
+      if: matrix.os == 'macos-latest'
+      uses: actions/upload-artifact@v2
+      with:
+        name: pmdungeon-macos
         path: desktop/target/pmdungeon-desktop-jar-with-dependencies.jar
