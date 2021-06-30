@@ -25,6 +25,7 @@ jobs:
       run: mvn -B install --file pom.xml
       
     - name: Check with PMD
+      if: runner.os == 'ubuntu-latest'
       run: mvn pmd:pmd --file pom.xml
       
     - name: jacoco-badge-generator
@@ -36,6 +37,7 @@ jobs:
         jacoco-csv-file: core/target/site/jacoco/jacoco.csv
         
     - name: Commit and push the badge (if it changed)
+      if: runner.os == 'ubuntu-latest'
       uses: EndBug/add-and-commit@v7
       with:
         default_author: github_actions
@@ -43,18 +45,21 @@ jobs:
         add: '*.svg'
 
     - name: Upload JaCoCo coverage report
+      if: runner.os == 'ubuntu-latest'
       uses: actions/upload-artifact@v2
       with:
         name: jacoco-report
         path: core/target/site/jacoco/
 
     - name: Upload PMD report
+      if: runner.os == 'ubuntu-latest'
       uses: actions/upload-artifact@v2
       with:
         name: pmd-report
         path: core/target/site/pmd.html
 
     - name: Upload jar with dependencys
+      if: runner.os == 'ubuntu-latest'
       uses: actions/upload-artifact@v2
       with:
         name: pmdungeon
