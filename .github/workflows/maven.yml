@@ -29,7 +29,7 @@ jobs:
       run: mvn pmd:pmd --file pom.xml
       
     - name: jacoco-badge-generator
-      if: runner.os == 'ubuntu-latest' && runner.java == '11'
+      if: runner.os == 'ubuntu-latest' && runner.java-version == '11'
       uses: cicirello/jacoco-badge-generator@v2.2.1
       with:
         generate-coverage-badge: true
