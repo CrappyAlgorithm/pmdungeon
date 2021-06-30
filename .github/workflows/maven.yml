@@ -3,11 +3,7 @@
 
 name: maven build
 
-on:
-  push:
-    branches: [ setup-ghactions, unit-test-creation ]
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request]
 
 jobs:
   build:
