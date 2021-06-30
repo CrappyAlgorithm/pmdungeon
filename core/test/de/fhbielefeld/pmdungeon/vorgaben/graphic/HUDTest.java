@@ -13,9 +13,13 @@ import de.fhbielefeld.pmdungeon.vorgaben.testutil.ObjectManipulator;
 import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockedStatic;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -23,19 +27,19 @@ import static org.mockito.Mockito.*;
 
 
 public class HUDTest{
-    HUD hud;
-    SpriteBatch mBatch = mock(SpriteBatch.class);
-    OrthographicCamera mCamera = mock(OrthographicCamera.class);
+
+    @Mock SpriteBatch mBatch;
+    @Mock OrthographicCamera mCamera;
+    @InjectMocks HUD hud;
 
     @Before
-    public void setup(){
-        this.hud = new HUD(mBatch, mCamera,new ArrayList());
+    public void setup() throws Exception {
+        MockitoAnnotations.openMocks(this).close();
     }
 
     //ID=25.1
     @Test
     public void testCreateHUD() {
-
         assertEquals(mBatch, hud.getHudBatch());
         assertEquals(mCamera, hud.hudCamera);
         assertNotEquals(null, hud.hudElements);

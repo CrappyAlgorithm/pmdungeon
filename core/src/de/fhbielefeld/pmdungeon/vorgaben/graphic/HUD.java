@@ -30,10 +30,10 @@ public class HUD {
     }
 
     //ONLY FOR TEST PURPOSES!
-    public HUD(SpriteBatch hudBatch, OrthographicCamera hudCamera, ArrayList hudElements) {
+    public HUD(SpriteBatch hudBatch, OrthographicCamera hudCamera) {
         this.hudBatch = hudBatch;
         this.hudCamera = hudCamera;
-        this.hudElements = hudElements;
+        this.hudElements = new ArrayList<>();
     }
 
     /**
