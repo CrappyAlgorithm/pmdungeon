@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class DungeonCameraTest {
 
-    //35.1
+    //33.1
     @Test
     public void testConstructorFollows() {
         IDrawable follows=new IDrawable() {
@@ -29,7 +29,7 @@ public class DungeonCameraTest {
         assertEquals(camera.getFollowedObject(), follows);
     }
 
-    //35.2
+    //33.2
     @Test
     public void testConstructorFollowsNull() {
         IDrawable follows=null;

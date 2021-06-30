@@ -23,9 +23,9 @@ public class PointOfCoordinateTest {
     @Parameterized.Parameters
     public static Collection params() {
         return Arrays.asList(new Object[][] {
-                { new Coordinate(2353, 3251) },
-                {new Coordinate(-1, 53980)},
-                {new Coordinate(97259, -1)}
+                { new Coordinate(2353, 3251) },     // 23.1
+                {new Coordinate(-1, 53980)},        // ---
+                {new Coordinate(97259, -1)}         // ---
         });
     }
 

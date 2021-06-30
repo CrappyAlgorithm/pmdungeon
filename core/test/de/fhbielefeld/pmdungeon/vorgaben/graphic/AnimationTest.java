@@ -18,14 +18,14 @@ import static org.mockito.Mockito.mock;
 
 public class AnimationTest {
 
-    //33.1
+    //31.1
     @Test(expected=IllegalArgumentException.class)
     public void testCreateWithAnimationFramesEmpty() {
         ArrayList <Texture> animationFrames = new ArrayList<Texture>();
         Animation animation = new Animation(animationFrames, 1);
     }
 
-    //33.2
+    //31.2
     @Test
     public void testCreateWithAnimationFramesNotEmpty() {
         ArrayList <Texture> animationFrames = new ArrayList<Texture>();
@@ -33,7 +33,7 @@ public class AnimationTest {
         Animation animation = new Animation(animationFrames, 1);
     }
 
-    //33.3
+    //31.3
     @Test(expected=IllegalArgumentException.class)
     public void testCreateWithframeTimeLessThanZero() {
         ArrayList <Texture> animationFrames = new ArrayList<Texture>();
@@ -41,7 +41,7 @@ public class AnimationTest {
         Animation animation = new Animation(animationFrames, -1);
     }
 
-    //33.4
+    //31.4
     @Test
     public void testCreateWithframeTimeGreaterEqualsZero() {
         ArrayList <Texture> animationFrames = new ArrayList<Texture>();
@@ -49,7 +49,7 @@ public class AnimationTest {
         Animation animation = new Animation(animationFrames, 1);
     }
 
-    //34.1 und 34.2
+    //32.1 und 32.2
     @Test
     public void testCreateWithframegetNextAnimationTexture() {
         ArrayList <Texture> animationFrames = new ArrayList<Texture>();
