@@ -19,6 +19,7 @@ public class PointOfCoordinateTest {
         this.coordinate = coordinate;
     }
 
+    // 23.1
     @Parameterized.Parameters
     public static Collection params() {
         return Arrays.asList(new Object[][] {

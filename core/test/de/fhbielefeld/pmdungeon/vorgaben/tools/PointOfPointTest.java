@@ -20,6 +20,7 @@ public class PointOfPointTest {
         this.otherPoint = otherPoint;
     }
 
+    // 24.1
     @Parameterized.Parameters
     public static Collection params() {
         return Arrays.asList(new Object[][] {

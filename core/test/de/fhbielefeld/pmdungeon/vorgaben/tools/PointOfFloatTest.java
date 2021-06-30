@@ -24,10 +24,10 @@ public class PointOfFloatTest {
     @Parameterized.Parameters
     public static Collection cords() {
         return Arrays.asList(new Object[][] {
-                { 0F, 0F },
-                { 24.235F, 346.255F},
-                {-1F, 5.3251F},
-                {3547.32F, -1F}
+                {-1F, 5.3251F},         // 22.1
+                { 24.235F, 346.255F},   // 22.2
+                {3547.32F, -1F},        // 22.3
+                { 0F, 0F },             // 22.4
         });
     }
 
