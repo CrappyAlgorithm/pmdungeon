@@ -23,7 +23,7 @@ public class TextStageTest {
 
 
     //ID=19.2
-    @Test //(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testCreateWithbachNull() {
         TextStage textStage = new TextStage(null);
     }
