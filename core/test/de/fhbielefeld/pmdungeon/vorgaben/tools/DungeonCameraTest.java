@@ -11,14 +11,6 @@ import static org.junit.Assert.assertEquals;
 
 public class DungeonCameraTest {
 
-    //35.2
-    @Test
-    public void testConstructorFollowsNull() {
-        IDrawable follows=null;
-        DungeonCamera camera = Mockito.spy(new DungeonCamera(null));
-        assertEquals(camera.getFollowedObject(), null);
-    }
-
     //35.1
     @Test
     public void testConstructorFollows() {
@@ -36,4 +28,14 @@ public class DungeonCameraTest {
         DungeonCamera camera = new DungeonCamera(follows);
         assertEquals(camera.getFollowedObject(), follows);
     }
+
+    //35.2
+    @Test
+    public void testConstructorFollowsNull() {
+        IDrawable follows=null;
+        DungeonCamera camera = Mockito.spy(new DungeonCamera(null));
+        assertEquals(camera.getFollowedObject(), null);
+    }
+
+
 }
