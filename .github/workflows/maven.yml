@@ -59,8 +59,7 @@ jobs:
         path: core/target/site/pmd.html
 
     - name: Upload jar with dependencys
-      if: runner.os == 'ubuntu-latest' && runner.java == '11'
       uses: actions/upload-artifact@v2
       with:
-        name: pmdungeon
+        name: format('pmdungeon-{0}-{1}{2}', ${matrix.os}, 'jdk', ${matrix.java})
         path: desktop/target/pmdungeon-desktop-jar-with-dependencies.jar
