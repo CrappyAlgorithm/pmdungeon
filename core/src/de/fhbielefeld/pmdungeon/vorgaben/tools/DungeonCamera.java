@@ -23,6 +23,13 @@ public class DungeonCamera extends OrthographicCamera {
             this.follows = follows;
     }
 
+    //ONLY FOR TEST PURPOSES
+    public DungeonCamera(IDrawable follows) {
+        this.position.set(0,0,0);
+        if (follows != null)
+            this.follows = follows;
+    }
+
     /**
      * set the entity to follow
      *

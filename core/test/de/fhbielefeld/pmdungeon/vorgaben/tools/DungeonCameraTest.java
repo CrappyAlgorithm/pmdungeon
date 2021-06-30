@@ -14,8 +14,7 @@ public class DungeonCameraTest {
     @Test
     public void testConstructorFollowsNull() {
         IDrawable follows=null;
-        DungeonCamera camera = Mockito.spy(new DungeonCamera(null,Constants.VIRTUALHEIGHT * Constants.WIDTH / (float) Constants.HEIGHT, Constants.VIRTUALHEIGHT));
-        Mockito.doNothing().when((OrthographicCamera)camera).OrthographicCamera();
+        DungeonCamera camera = Mockito.spy(new DungeonCamera(null));
         assertEquals(camera.getFollowedObject(), null);
     }
 
@@ -32,7 +31,7 @@ public class DungeonCameraTest {
                 return null;
             }
         };
-        DungeonCamera camera = new DungeonCamera(follows,Constants.VIRTUALHEIGHT * Constants.WIDTH / (float) Constants.HEIGHT, Constants.VIRTUALHEIGHT);
+        DungeonCamera camera = new DungeonCamera(follows);
         assertEquals(camera.getFollowedObject(), follows);
     }
 }
