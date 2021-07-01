@@ -17,9 +17,9 @@ import java.util.List;
  */
 public class HUD {
     private final SpriteBatch hudBatch;
-    private final OrthographicCamera hudCamera;
-    private final List<IHUDElement> hudElements;
-    private boolean usePixelSystem = false;
+    protected final OrthographicCamera hudCamera;
+    protected final List<IHUDElement> hudElements;
+    protected boolean usePixelSystem = false;
 
     public HUD() {
         hudBatch = new SpriteBatch();
@@ -27,6 +27,13 @@ public class HUD {
         hudCamera.position.set(0, 0, 0);
         hudCamera.update();
         hudElements = new ArrayList<>();
+    }
+
+    //ONLY FOR TEST PURPOSES!
+    public HUD(SpriteBatch hudBatch, OrthographicCamera hudCamera) {
+        this.hudBatch = hudBatch;
+        this.hudCamera = hudCamera;
+        this.hudElements = new ArrayList<>();
     }
 
     /**
@@ -73,7 +80,7 @@ public class HUD {
     /**
      * Draws all the elements
      */
-    private void drawElements() {
+    protected void drawElements() {
         for (IHUDElement element : hudElements) {
             Texture texture = element.getTexture();
             Sprite sprite = new Sprite(texture);

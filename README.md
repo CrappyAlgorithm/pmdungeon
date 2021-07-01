@@ -4,7 +4,9 @@ author: "André Matutat"
 lang: de-DE
 ...
 
-
+![test](https://github.com/CrappyAlgorithm/pmdungeon/actions/workflows/maven.yml/badge.svg?branch=test-development)
+![Coverage](.github/badges/jacoco.svg)
+![Branches](.github/badges/branches.svg)
 
 ## Einleitung
 

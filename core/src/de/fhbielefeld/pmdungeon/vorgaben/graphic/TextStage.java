@@ -17,10 +17,15 @@ import java.util.ArrayList;
  */
 public class TextStage extends Stage {
 
-    private final ArrayList<Label> labels;
+    protected final ArrayList<Label> labels;
 
     public TextStage(SpriteBatch batch) {
         super(new ScreenViewport(), batch);
+        labels = new ArrayList<>();
+    }
+
+    // ONLY FOR TESTING PURPOSES
+    public TextStage() {
         labels = new ArrayList<>();
     }
 

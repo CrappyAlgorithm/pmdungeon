@@ -14,7 +14,7 @@ public class GameSetup extends Game {
      * This INSTANCE is necessary to draw ALL the stuff. Every Object that uses draw need to know THIS INSTANCE
      */
     public static SpriteBatch batch;
-    private final MainController mc;
+    protected final MainController mc;
 
     public GameSetup(MainController mc) {
         this.mc = mc;
