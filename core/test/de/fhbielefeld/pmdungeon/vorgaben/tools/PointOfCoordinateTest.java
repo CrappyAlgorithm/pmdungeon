@@ -10,6 +10,10 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author gysar.flegel@fh-bielefeld.de
+ * @author sebastian.steinmeyer@fh-bielefeld.de
+ */
 @RunWith(Parameterized.class)
 public class PointOfCoordinateTest {
 
@@ -19,11 +23,11 @@ public class PointOfCoordinateTest {
         this.coordinate = coordinate;
     }
 
-    // 23.1
+    // ID 23.x
     @Parameterized.Parameters
     public static Collection params() {
-        return Arrays.asList(new Object[][] {
-                { new Coordinate(2353, 3251) },     // 23.1
+        return Arrays.asList(new Object[][]{
+                {new Coordinate(2353, 3251)},     // ID 23.1
                 {new Coordinate(-1, 53980)},        // ---
                 {new Coordinate(97259, -1)}         // ---
         });

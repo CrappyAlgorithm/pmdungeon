@@ -1,6 +1,5 @@
 package de.fhbielefeld.pmdungeon.vorgaben.game.Controller;
 
-import com.sun.tools.javac.Main;
 import de.fhbielefeld.pmdungeon.vorgaben.dungeonCreator.DungeonWorld;
 import de.fhbielefeld.pmdungeon.vorgaben.dungeonCreator.dungeonconverter.DungeonConverter;
 import de.fhbielefeld.pmdungeon.vorgaben.dungeonCreator.tiles.Tile;
@@ -10,66 +9,67 @@ import de.fhbielefeld.pmdungeon.vorgaben.tools.Constants;
 import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
 import org.junit.Test;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-
+/**
+ * @author gysar.flegel@fh-bielefeld.de
+ * @author sebastian.steinmeyer@fh-bielefeld.de
+ */
 public class LevelControllerTest {
 
-    // 7.1
+    // ID 7.1
     @Test
     public void testConstructor() throws NoSuchMethodException {
         MainController mc = mock(MainController.class);
         Method onLevelLoad = mc.getClass().getMethod("onLevelLoad");
         Object[] args = {};
-        LevelController lc = new LevelController(onLevelLoad, mc,args);
+        LevelController lc = new LevelController(onLevelLoad, mc, args);
         assertEquals(mc, lc.klass);
         assertEquals(onLevelLoad, lc.onLevelLoad);
         assertEquals(args, lc.args);
     }
 
-    // 8.1
+    // ID 8.1
     @Test
     public void testLoadDungeon() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         MainController mc = mock(MainController.class);
         DungeonWorld mdung = mock(DungeonWorld.class);
         Object[] args = {};
-        LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), mc,args);
+        LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), mc, args);
 
         lc.loadDungeon(mdung);
-        verify(mc,times(1)).onLevelLoad();
-        verify(mdung,times(1)).makeConnections();
+        verify(mc, times(1)).onLevelLoad();
+        verify(mdung, times(1)).makeConnections();
     }
 
-    // 8.2
+    // ID 8.2
     @Test(expected = NullPointerException.class)
     public void testLoadDungeonDungeonNull() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         MainController mc = mock(MainController.class);
         Object[] args = {};
-        LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), mc,args);
+        LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), mc, args);
 
         lc.loadDungeon(null);
     }
 
-    // 8.3
+    // ID 8.3
     @Test(expected = NullPointerException.class)
     public void testLoadDungeonKlassIsNull() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         MainController mc = mock(MainController.class);
         DungeonWorld mdung = mock(DungeonWorld.class);
         Object[] args = {};
-        LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), null,args);
+        LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), null, args);
 
         lc.loadDungeon(mdung);
-        verify(mc,times(1)).onLevelLoad();
-        verify(mdung,times(1)).makeConnections();
+        verify(mc, times(1)).onLevelLoad();
+        verify(mdung, times(1)).makeConnections();
     }
 
-    // 8.4
+    // ID 8.4
     @Test
     public void testLoadDungeonArgsIsNull() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         MainController mc = mock(MainController.class);
@@ -78,11 +78,11 @@ public class LevelControllerTest {
         LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), mc, null);
 
         lc.loadDungeon(mdung);
-        verify(mc,times(1)).onLevelLoad();
-        verify(mdung,times(1)).makeConnections();
+        verify(mc, times(1)).onLevelLoad();
+        verify(mdung, times(1)).makeConnections();
     }
 
-    // 8.5
+    // ID 8.5
     @Test(expected = IllegalArgumentException.class)
     public void testLoadDungeonKlassIsNotMainController() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         MainController mc = mock(MainController.class);
@@ -91,22 +91,22 @@ public class LevelControllerTest {
         LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), new Object(), args);
 
         lc.loadDungeon(mdung);
-        verify(mc,times(1)).onLevelLoad();
-        verify(mdung,times(1)).makeConnections();
+        verify(mc, times(1)).onLevelLoad();
+        verify(mdung, times(1)).makeConnections();
     }
 
-    // 8.6
+    // ID 8.6
     @Test(expected = NullPointerException.class)
     public void testLoadDungeonMethodNull() throws InvocationTargetException, IllegalAccessException {
         MainController mc = mock(MainController.class);
         DungeonWorld mdung = mock(DungeonWorld.class);
         Object[] args = {};
-        LevelController lc = new LevelController(null, mc,args);
+        LevelController lc = new LevelController(null, mc, args);
 
         lc.loadDungeon(mdung);
     }
 
-    // 9.1
+    // ID 9.1
     @Test
     public void testUpdate() throws InvocationTargetException, IllegalAccessException {
         LevelController mlc = mock(LevelController.class);
@@ -118,7 +118,7 @@ public class LevelControllerTest {
         verify(mlc).draw();
     }
 
-    // 9.2
+    // ID 9.2
     @Test
     public void testUpdateNextLevelTriggeredFalse() throws InvocationTargetException, IllegalAccessException {
         LevelController mlc = mock(LevelController.class);
@@ -130,14 +130,14 @@ public class LevelControllerTest {
         verify(mlc).draw();
     }
 
-    // 10.1
+    // ID 10.1
     @Test
     public void testCheckForTrigger() throws NoSuchMethodException {
         MainController mc = mock(MainController.class);
         DungeonWorld mdung = mock(DungeonWorld.class);
         Object[] args = {};
         Point p = new Point(2, 5);
-        LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), mc,args);
+        LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), mc, args);
 
         when(mdung.getNextLevelTrigger()).thenReturn(new Tile(Tile.Type.EMPTY, (int) p.x, (int) p.y));
         lc.dungeonWorld = mdung;
@@ -145,14 +145,14 @@ public class LevelControllerTest {
         assertEquals(true, lc.checkForTrigger(p));
     }
 
-    // 10.2
+    // ID 10.2
     @Test
     public void testCheckForTriggerXNotSame() throws NoSuchMethodException {
         MainController mc = mock(MainController.class);
         DungeonWorld mdung = mock(DungeonWorld.class);
         Object[] args = {};
         Point p = new Point(2, 5);
-        LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), mc,args);
+        LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), mc, args);
 
         when(mdung.getNextLevelTrigger()).thenReturn(new Tile(Tile.Type.EMPTY, 4, (int) p.y));
         lc.dungeonWorld = mdung;
@@ -160,14 +160,14 @@ public class LevelControllerTest {
         assertEquals(false, lc.checkForTrigger(p));
     }
 
-    // 10.3
+    // ID 10.3
     @Test
     public void testCheckForTriggerYNotSame() throws NoSuchMethodException {
         MainController mc = mock(MainController.class);
         DungeonWorld mdung = mock(DungeonWorld.class);
         Object[] args = {};
         Point p = new Point(2, 5);
-        LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), mc,args);
+        LevelController lc = new LevelController(mc.getClass().getMethod("onLevelLoad"), mc, args);
 
         when(mdung.getNextLevelTrigger()).thenReturn(new Tile(Tile.Type.EMPTY, (int) p.x, 10));
         lc.dungeonWorld = mdung;
@@ -175,7 +175,7 @@ public class LevelControllerTest {
         assertEquals(false, lc.checkForTrigger(p));
     }
 
-    // 11.1
+    // ID 11.1
     @Test
     public void testTriggerNextStage() throws NoSuchMethodException {
         MainController mc = mock(MainController.class);
@@ -186,7 +186,7 @@ public class LevelControllerTest {
         assertEquals(true, lc.nextLevelTriggered);
     }
 
-    // 12.1
+    // ID 12.1
     @Test
     public void testDraw() throws NoSuchMethodException {
         MainController mc = mock(MainController.class);
@@ -201,7 +201,7 @@ public class LevelControllerTest {
         verify(mdung).renderWalls(0, 0, GameSetup.batch);
     }
 
-    // 12.2
+    // ID 12.2
     @Test
     public void testDrawDungeonWorldIsNull() throws NoSuchMethodException {
         MainController mc = mock(MainController.class);
@@ -211,7 +211,7 @@ public class LevelControllerTest {
         lc.draw();
     }
 
-    // 13.1
+    // ID 13.1
     @Test
     public void testNextStageAToB() throws InvocationTargetException, IllegalAccessException, NoSuchFieldException {
         LevelController mlc = mock(LevelController.class);
@@ -225,7 +225,7 @@ public class LevelControllerTest {
         verify(mlc).loadDungeon(any());
     }
 
-    // 13.2
+    // ID 13.2
     @Test
     public void testNextStageBToC() throws InvocationTargetException, IllegalAccessException, NoSuchFieldException {
         LevelController mlc = mock(LevelController.class);
@@ -239,7 +239,7 @@ public class LevelControllerTest {
         verify(mlc).loadDungeon(any());
     }
 
-    // 13.3
+    // ID 13.3
     @Test
     public void testNextStageCToD() throws InvocationTargetException, IllegalAccessException, NoSuchFieldException {
         LevelController mlc = mock(LevelController.class);
@@ -253,7 +253,7 @@ public class LevelControllerTest {
         verify(mlc).loadDungeon(any());
     }
 
-    // 13.4
+    // ID 13.4
     @Test
     public void testNextStageDToA() throws InvocationTargetException, IllegalAccessException, NoSuchFieldException {
         LevelController mlc = mock(LevelController.class);

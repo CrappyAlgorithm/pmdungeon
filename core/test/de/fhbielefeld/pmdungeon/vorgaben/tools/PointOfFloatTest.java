@@ -6,8 +6,13 @@ import java.util.Collection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author gysar.flegel@fh-bielefeld.de
+ * @author sebastian.steinmeyer@fh-bielefeld.de
+ */
 @RunWith(Parameterized.class)
 public class PointOfFloatTest {
 
@@ -21,13 +26,14 @@ public class PointOfFloatTest {
         this.y = y;
     }
 
+    // ID 22.x
     @Parameterized.Parameters
     public static Collection cords() {
-        return Arrays.asList(new Object[][] {
-                {-1F, 5.3251F},         // 22.1
-                { 24.235F, 346.255F},   // 22.2
-                {3547.32F, -1F},        // 22.3
-                { 0F, 0F },             // 22.4
+        return Arrays.asList(new Object[][]{
+                {-1F, 5.3251F},         // ID 22.1
+                {24.235F, 346.255F},   // ID 22.2
+                {3547.32F, -1F},        // ID 22.3
+                {0F, 0F},             // ID 22.4
         });
     }
 

@@ -4,24 +4,21 @@ import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.awt.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author gysar.flegel@fh-bielefeld.de
+ * @author sebastian.steinmeyer@fh-bielefeld.de
+ */
 @RunWith(Parameterized.class)
 public class TextStageDrawTextTest {
 
@@ -39,23 +36,23 @@ public class TextStageDrawTextTest {
     private int y;
 
     public TextStageDrawTextTest(String text, String fontPath, Color color, int size, int width, int height, int x, int y) {
-        this.text=text;
-        this.fontPath=fontPath;
-        this.color=color;
-        this.size=size;
-        this.width=width;
-        this.height=height;
-        this.x=x;
-        this.y=y;
+        this.text = text;
+        this.fontPath = fontPath;
+        this.color = color;
+        this.size = size;
+        this.width = width;
+        this.height = height;
+        this.x = x;
+        this.y = y;
         this.textStage = mock(TextStage.class);
         doCallRealMethod().when(this.textStage).drawText(text, fontPath, color, size, width, height, x, y);
     }
 
     @Parameterized.Parameters
     public static Collection cords() {
-        String path="../assets/Asdonuts.ttf"; //BRAUCHT SINNVOLLEN PFAD
-        return Arrays.asList(new Object[][] {
-                { "text", path, Color.GOLD, 10,10,10,10,10 },                   // ID=20.1
+        String path = "../assets/Asdonuts.ttf"; //BRAUCHT SINNVOLLEN PFAD
+        return Arrays.asList(new Object[][]{
+                {"text", path, Color.GOLD, 10, 10, 10, 10, 10},                   // ID=20.1
                 //{ "text", "not existing path", Color.GOLD, 10,10,10,10,10 },    // ID=20.2
                 //{ null, path, Color.GOLD, 10,10,10,10,10 },
                 //{ "text", null, Color.GOLD, 10,10,10,10,10 },
@@ -76,12 +73,13 @@ public class TextStageDrawTextTest {
         when(mFiles.internal(fontPath)).thenReturn(fileHandle);
         Gdx.files = mFiles;
 
-        Label label = textStage.drawText(text, fontPath, color, size, width, height,  x,  y);
+        Label label = textStage.drawText(text, fontPath, color, size, width, height, x, y);
         assertEquals(text, label.getText());
         assertEquals(width, label.getWidth(), DELTA);
         assertEquals(height, label.getHeight(), DELTA);
     }
 
     @Test
-    public void placeholder() {}
+    public void placeholder() {
+    }
 }

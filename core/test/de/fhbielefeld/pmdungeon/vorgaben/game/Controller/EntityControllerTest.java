@@ -3,12 +3,15 @@ package de.fhbielefeld.pmdungeon.vorgaben.game.Controller;
 import de.fhbielefeld.pmdungeon.vorgaben.interfaces.IEntity;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
-
+/**
+ * @author gysar.flegel@fh-bielefeld.de
+ * @author sebastian.steinmeyer@fh-bielefeld.de
+ */
 public class EntityControllerTest {
 
     EntityController entityController;
@@ -20,7 +23,8 @@ public class EntityControllerTest {
         entityController = new EntityController();
         entity1 = new IEntity() {
             @Override
-            public void update() { }
+            public void update() {
+            }
 
             @Override
             public boolean deleteable() {
@@ -29,7 +33,8 @@ public class EntityControllerTest {
         };
         entity2 = new IEntity() {
             @Override
-            public void update() { }
+            public void update() {
+            }
 
             @Override
             public boolean deleteable() {
@@ -38,14 +43,14 @@ public class EntityControllerTest {
         };
     }
 
-    // ID=1.1
+    // ID 1.1
     @Test
     public void TestConstruktor() {
         List<IEntity> entities = entityController.getList();
         assertEquals(true, entities.isEmpty());
     }
 
-    // ID=2.1
+    // ID 2.1
     @Test
     public void TestAddEntity() {
         entityController.addEntity(entity1);
@@ -54,7 +59,7 @@ public class EntityControllerTest {
         assertEquals(entity1, entities.get(0));
     }
 
-    // ID=2.2
+    // ID 2.2
     @Test
     public void TestAddEntityWithNull() {
         entityController.addEntity(entity1);
@@ -63,7 +68,7 @@ public class EntityControllerTest {
         assertEquals(2, entities.size()); // set expected to 1 after fix
     }
 
-    // ID=2.3
+    // ID 2.3
     @Test
     public void TestAddEntityTwice() {
         entityController.addEntity(entity1);
@@ -72,7 +77,7 @@ public class EntityControllerTest {
         assertEquals(1, entities.size());
     }
 
-    // ID=3.1
+    // ID 3.1
     @Test
     public void TestRemoveEntity() {
         entityController.addEntity(entity1);
@@ -83,7 +88,7 @@ public class EntityControllerTest {
         assertEquals(entity1, entities.get(0));
     }
 
-    // ID=3.2
+    // ID 3.2
     @Test
     public void TestRemoveEntityNotInside() {
         entityController.addEntity(entity1);
@@ -93,7 +98,7 @@ public class EntityControllerTest {
         assertEquals(entity1, entities.get(0));
     }
 
-    // ID=3.3
+    // ID 3.3
     @Test
     public void TestRemoveEntityWithNull() {
         entityController.addEntity(entity1);
@@ -105,7 +110,7 @@ public class EntityControllerTest {
         assertEquals(entity2, entities.get(1));
     }
 
-    // ID=4.1
+    // ID 4.1
     @Test
     public void TestRemoveAll() {
         entityController.addEntity(entity1);
@@ -115,7 +120,7 @@ public class EntityControllerTest {
         assertEquals(true, entities.isEmpty());
     }
 
-    // ID=5.1
+    // ID 5.1
     @Test
     public void TestRemoveAllFrom() {
         entityController.addEntity(entity1);
@@ -126,7 +131,7 @@ public class EntityControllerTest {
         assertEquals(entity2, entities.get(0));
     }
 
-    // ID=5.2
+    // ID 5.2
     @Test
     public void TestRemoveAllFromNotInside() {
         entityController.addEntity(entity1);
@@ -136,15 +141,15 @@ public class EntityControllerTest {
         assertEquals(entity1, entities.get(0));
     }
 
-    // ID=5.3
-    @Test(expected=NullPointerException.class)
+    // ID 5.3
+    @Test(expected = NullPointerException.class)
     public void TestRemoveAllFromWithNull() {
         entityController.addEntity(entity1);
         entityController.addEntity(entity2);
         entityController.removeAllFrom(null);
     }
 
-    // ID=6.1
+    // ID 6.1
     @Test
     public void testUpdate() {
         entityController.addEntity(entity2);

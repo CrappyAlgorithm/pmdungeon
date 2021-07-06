@@ -1,15 +1,12 @@
 package de.fhbielefeld.pmdungeon.vorgaben.game.Controller;
 
-
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import de.fhbielefeld.pmdungeon.vorgaben.dungeonCreator.dungeonconverter.DungeonConverter;
 import de.fhbielefeld.pmdungeon.vorgaben.game.GameSetup;
 import de.fhbielefeld.pmdungeon.vorgaben.graphic.HUD;
 import de.fhbielefeld.pmdungeon.vorgaben.graphic.TextStage;
-import de.fhbielefeld.pmdungeon.vorgaben.tools.Constants;
 import de.fhbielefeld.pmdungeon.vorgaben.tools.DungeonCamera;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,25 +24,39 @@ import static org.mockito.ArgumentMatchers.anyFloat;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
 
+/**
+ * @author gysar.flegel@fh-bielefeld.de
+ * @author sebastian.steinmeyer@fh-bielefeld.de
+ */
 public class MainControllerTest {
 
-    @Mock LevelController mLevelController;
-    @Mock EntityController mEntityController;
-    @Mock DungeonCamera mDungeonCamera;
-    @Mock HUD mHUD;
-    @Mock TextStage mTextStage;
-    @Mock GL20 mGL;
-    @Mock SpriteBatch mSpriteBatch;
-    @Mock Application app;
-    @InjectMocks MainController mMainController = mock(MainController.class);
-    @InjectMocks MainController mainController = new MainController();
+    @Mock
+    LevelController mLevelController;
+    @Mock
+    EntityController mEntityController;
+    @Mock
+    DungeonCamera mDungeonCamera;
+    @Mock
+    HUD mHUD;
+    @Mock
+    TextStage mTextStage;
+    @Mock
+    GL20 mGL;
+    @Mock
+    SpriteBatch mSpriteBatch;
+    @Mock
+    Application app;
+    @InjectMocks
+    MainController mMainController = mock(MainController.class);
+    @InjectMocks
+    MainController mainController = new MainController();
 
     @Before
     public void init_mocks() throws Exception {
         MockitoAnnotations.openMocks(this).close();
     }
 
-    // ID=15.1
+    // ID 15.1
     @Test(expected = NullPointerException.class)
     public void testFirstFrameFinishedSetupTrue() throws InvocationTargetException, IllegalAccessException {
         mMainController.finishedSetup = true;
@@ -57,7 +68,7 @@ public class MainControllerTest {
         assertEquals(false, mMainController.firstFrame);
     }
 
-    // ID=15.2
+    // ID 15.2
     @Test(expected = UnsatisfiedLinkError.class)
     public void testFirstFrameFinishedSetupFalse() throws InvocationTargetException, IllegalAccessException {
         mMainController.finishedSetup = false;
@@ -70,7 +81,7 @@ public class MainControllerTest {
         assertEquals(false, mMainController.firstFrame);
     }
 
-    // ID=16.1
+    // ID 16.1
     @Test
     public void testRenderFirstFrameTrue() throws InvocationTargetException, IllegalAccessException {
         mMainController.firstFrame = true;
@@ -98,7 +109,7 @@ public class MainControllerTest {
         verify(mTextStage).draw();
     }
 
-    // ID=16.2
+    // ID 16.2
     @Test
     public void testRenderFirstFrameFalse() throws InvocationTargetException, IllegalAccessException {
         mMainController.firstFrame = false;
@@ -125,7 +136,7 @@ public class MainControllerTest {
         verify(mTextStage).draw();
     }
 
-    // ID=17.1
+    // ID 17.1
     @Test
     public void testSetupWorldController() {
         assertEquals(mLevelController, mainController.levelController);
@@ -133,7 +144,7 @@ public class MainControllerTest {
         assertNotEquals(mLevelController, mainController.levelController);
     }
 
-    // ID=18.1
+    // ID 18.1
     @Test(expected = UnsatisfiedLinkError.class)
     public void testSetupCamera() {
         assertEquals(mDungeonCamera, mainController.camera);

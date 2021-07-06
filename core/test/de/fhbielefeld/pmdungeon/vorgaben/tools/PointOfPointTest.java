@@ -9,6 +9,10 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author gysar.flegel@fh-bielefeld.de
+ * @author sebastian.steinmeyer@fh-bielefeld.de
+ */
 @RunWith(Parameterized.class)
 public class PointOfPointTest {
 
@@ -20,11 +24,11 @@ public class PointOfPointTest {
         this.otherPoint = otherPoint;
     }
 
-    // 24.1
+    // ID 24.1
     @Parameterized.Parameters
     public static Collection params() {
-        return Arrays.asList(new Object[][] {
-                { new Point(2.353F, 325.1F) },  // 24.1
+        return Arrays.asList(new Object[][]{
+                {new Point(2.353F, 325.1F)},  // ID 24.1
                 {new Point(-1, 539.806F)},      // ---
                 {new Point(972.59F, -1)}        // ---
         });

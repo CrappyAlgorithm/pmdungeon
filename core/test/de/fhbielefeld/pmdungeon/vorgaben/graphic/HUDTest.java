@@ -1,13 +1,8 @@
 package de.fhbielefeld.pmdungeon.vorgaben.graphic;
 
-
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import de.fhbielefeld.pmdungeon.vorgaben.game.GameSetup;
 import de.fhbielefeld.pmdungeon.vorgaben.interfaces.IHUDElement;
 import de.fhbielefeld.pmdungeon.vorgaben.testutil.ObjectManipulator;
 import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
@@ -15,29 +10,33 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author gysar.flegel@fh-bielefeld.de
+ * @author sebastian.steinmeyer@fh-bielefeld.de
+ */
+public class HUDTest {
 
-public class HUDTest{
-
-    @Mock SpriteBatch mBatch;
-    @Mock OrthographicCamera mCamera;
-    @InjectMocks HUD hud;
+    @Mock
+    SpriteBatch mBatch;
+    @Mock
+    OrthographicCamera mCamera;
+    @InjectMocks
+    HUD hud;
 
     @Before
     public void setup() throws Exception {
         MockitoAnnotations.openMocks(this).close();
     }
 
-    //ID=25.1
+    //ID 25.1
     @Test
     public void testCreateHUD() {
         assertEquals(mBatch, hud.getHudBatch());
@@ -45,21 +44,21 @@ public class HUDTest{
         assertNotEquals(null, hud.hudElements);
     }
 
-    //ID=26.1
+    //ID 26.1
     @Test
     public void testUsePixelSystemTrue() {
         hud.usePixelSystem(true);
-        assertEquals(hud.usePixelSystem,true);
+        assertEquals(hud.usePixelSystem, true);
     }
 
-    //ID=26.2
+    //ID 26.2
     @Test
     public void testUsePixelSystemFalse() {
         hud.usePixelSystem(false);
-        assertEquals(hud.usePixelSystem,false);
+        assertEquals(hud.usePixelSystem, false);
     }
 
-    //ID=27.1
+    //ID 27.1
     @Test
     public void testAddHudElement() {
 
@@ -75,22 +74,22 @@ public class HUDTest{
             }
         });
 
-        assertEquals(1,hud.hudElements.size());
+        assertEquals(1, hud.hudElements.size());
     }
 
-    //ID=27.2
+    //ID 27.2
     @Test
     public void testAddHudElementNull() {
 
         hud.addHudElement(null);
-        assertEquals(1,hud.hudElements.size()); // expected should be set to 0 when fixed
+        assertEquals(1, hud.hudElements.size()); // expected should be set to 0 when fixed
     }
 
-    //ID=28.1
+    //ID 28.1
     @Test
     public void testRemoveHudElement() {
 
-        IHUDElement element=new IHUDElement() {
+        IHUDElement element = new IHUDElement() {
             @Override
             public Point getPosition() {
                 return null;
@@ -103,14 +102,14 @@ public class HUDTest{
         };
         hud.addHudElement(element);
         hud.removeHudElement(element);
-        assertEquals(hud.hudElements.contains(element),false);
+        assertEquals(hud.hudElements.contains(element), false);
     }
 
-    //ID=28.2
+    //ID 28.2
     @Test
     public void testRemoveHudElementNull() {
 
-        IHUDElement element=new IHUDElement() {
+        IHUDElement element = new IHUDElement() {
             @Override
             public Point getPosition() {
                 return null;
@@ -123,10 +122,10 @@ public class HUDTest{
         };
         hud.addHudElement(element);
         hud.removeHudElement(null);
-        assertEquals(hud.hudElements.contains(element),true);
+        assertEquals(hud.hudElements.contains(element), true);
     }
 
-    //ID=29.1
+    //ID 29.1
     @Test
     public void testDraw() throws NoSuchFieldException, IllegalAccessException {
         HUD mHud = mock(HUD.class);
@@ -177,7 +176,7 @@ public class HUDTest{
         verify(mHud).drawElements();
     }
 
-    //ID=29.2
+    //ID 29.2
     @Test
     public void testDrawWithPixelFalse() throws NoSuchFieldException, IllegalAccessException {
         HUD mHud = mock(HUD.class);

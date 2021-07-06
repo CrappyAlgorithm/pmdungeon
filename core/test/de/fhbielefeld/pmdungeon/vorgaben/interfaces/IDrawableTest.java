@@ -1,8 +1,6 @@
 package de.fhbielefeld.pmdungeon.vorgaben.interfaces;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.fhbielefeld.pmdungeon.vorgaben.game.GameSetup;
 import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
@@ -16,10 +14,16 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.verify;
 
+/**
+ * @author gysar.flegel@fh-bielefeld.de
+ * @author sebastian.steinmeyer@fh-bielefeld.de
+ */
 public class IDrawableTest {
 
-    @Mock Texture texture;
-    @Mock SpriteBatch spriteBatch;
+    @Mock
+    Texture texture;
+    @Mock
+    SpriteBatch spriteBatch;
 
     IDrawable iDrawable;
 
@@ -40,7 +44,7 @@ public class IDrawableTest {
         };
     }
 
-    // ID: 38.1
+    // ID 38.1
     @Test
     public void testDrawWithFourParameter() {
         try (MockedStatic<GameSetup> mGameSetup = mockStatic(GameSetup.class)) {
@@ -48,11 +52,11 @@ public class IDrawableTest {
             iDrawable.draw(1.1f, 1.2f, 1.3f, 1.4f);
         }
         verify(spriteBatch).begin();
-        verify(spriteBatch).draw(any(Texture.class), any(float[].class), anyInt(), anyInt() );
+        verify(spriteBatch).draw(any(Texture.class), any(float[].class), anyInt(), anyInt());
         verify(spriteBatch).end();
     }
 
-    // ID: 38.2
+    // ID 38.2
     @Test
     public void testDrawWithoutParameter() {
         try (MockedStatic<GameSetup> mGameSetup = mockStatic(GameSetup.class)) {
@@ -60,11 +64,11 @@ public class IDrawableTest {
             iDrawable.draw();
         }
         verify(spriteBatch).begin();
-        verify(spriteBatch).draw(any(Texture.class), any(float[].class), anyInt(), anyInt() );
+        verify(spriteBatch).draw(any(Texture.class), any(float[].class), anyInt(), anyInt());
         verify(spriteBatch).end();
     }
 
-    // ID: 38.3
+    // ID 38.3
     @Test
     public void testDrawWithTwoParameter() {
         try (MockedStatic<GameSetup> mGameSetup = mockStatic(GameSetup.class)) {
@@ -72,11 +76,11 @@ public class IDrawableTest {
             iDrawable.draw(1.1f, 1.2f);
         }
         verify(spriteBatch).begin();
-        verify(spriteBatch).draw(any(Texture.class), any(float[].class), anyInt(), anyInt() );
+        verify(spriteBatch).draw(any(Texture.class), any(float[].class), anyInt(), anyInt());
         verify(spriteBatch).end();
     }
 
-    // ID: 38.4
+    // ID 38.4
     @Test
     public void testDrawWithScalings() {
         try (MockedStatic<GameSetup> mGameSetup = mockStatic(GameSetup.class)) {
@@ -84,7 +88,7 @@ public class IDrawableTest {
             iDrawable.drawWithScaling(1.1f, 1.2f);
         }
         verify(spriteBatch).begin();
-        verify(spriteBatch).draw(any(Texture.class), any(float[].class), anyInt(), anyInt() );
+        verify(spriteBatch).draw(any(Texture.class), any(float[].class), anyInt(), anyInt());
         verify(spriteBatch).end();
     }
 }
