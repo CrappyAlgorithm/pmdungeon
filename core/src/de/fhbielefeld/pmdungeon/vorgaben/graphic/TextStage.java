@@ -24,11 +24,6 @@ public class TextStage extends Stage {
         labels = new ArrayList<>();
     }
 
-    // ONLY FOR TESTING PURPOSES
-    public TextStage() {
-        labels = new ArrayList<>();
-    }
-
     /**
      * Draws a given text on the screen.
      *

@@ -2,7 +2,9 @@ package de.fhbielefeld.pmdungeon.vorgaben.graphic;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import de.fhbielefeld.pmdungeon.vorgaben.interfaces.IHUDElement;
 import de.fhbielefeld.pmdungeon.vorgaben.testutil.ObjectManipulator;
 import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
@@ -10,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockedConstruction;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
@@ -31,9 +34,19 @@ public class HUDTest {
     @InjectMocks
     HUD hud;
 
+    Vector3 v3 = new Vector3(0, 0, 0);
+
     @Before
     public void setup() throws Exception {
-        MockitoAnnotations.openMocks(this).close();
+        try (MockedConstruction<SpriteBatch> mSpriteBatch = mockConstruction(SpriteBatch.class);
+             MockedConstruction<OrthographicCamera> mOrthographicCamera = mockConstruction(OrthographicCamera.class,
+                (mock, context) -> {
+                    ObjectManipulator.overrrideFinalAttribute(mock, "position", new Vector3(0, 0, 0));
+                })) {
+            MockitoAnnotations.openMocks(this).close();
+            mBatch = mSpriteBatch.constructed().get(0);
+            mCamera = mOrthographicCamera.constructed().get(0);
+        }
     }
 
     //ID 25.1
@@ -147,31 +160,9 @@ public class HUDTest {
                 return null;
             }
         });
-        mHud.addHudElement(new IHUDElement() {
-            @Override
-            public Point getPosition() {
-                return null;
-            }
-
-            @Override
-            public Texture getTexture() {
-                return null;
-            }
-        });
-        mHud.addHudElement(new IHUDElement() {
-            @Override
-            public Point getPosition() {
-                return null;
-            }
-
-            @Override
-            public Texture getTexture() {
-                return null;
-            }
-        });
         mHud.usePixelSystem(true);
         mHud.draw();
-        verify(mCamera).update();
+        verify(mCamera, times(2)).update();
         verify(mBatch, times(2)).setProjectionMatrix(mCamera.combined);
         verify(mHud).drawElements();
     }
@@ -198,33 +189,63 @@ public class HUDTest {
                 return null;
             }
         });
-        mHud.addHudElement(new IHUDElement() {
-            @Override
-            public Point getPosition() {
-                return null;
-            }
-
-            @Override
-            public Texture getTexture() {
-                return null;
-            }
-        });
-        mHud.addHudElement(new IHUDElement() {
-            @Override
-            public Point getPosition() {
-                return null;
-            }
-
-            @Override
-            public Texture getTexture() {
-                return null;
-            }
-        });
         mHud.usePixelSystem(false);
         mHud.draw();
         verify(mCamera).setToOrtho(anyBoolean(), anyFloat(), anyFloat());
-        verify(mCamera).update();
+        verify(mCamera, times(2)).update();
         verify(mBatch, times(2)).setProjectionMatrix(mCamera.combined);
         verify(mHud).drawElements();
+    }
+
+    @Test
+    public void testDrawElements() throws NoSuchFieldException, IllegalAccessException {
+        hud.addHudElement(new IHUDElement() {
+            @Override
+            public Point getPosition() {
+                return new Point(1, 1);
+            }
+
+            @Override
+            public Texture getTexture() {
+                Texture t = mock(Texture.class);
+                when(t.getHeight()).thenReturn(1);
+                return t;
+            }
+        });
+        hud.addHudElement(new IHUDElement() {
+            @Override
+            public Point getPosition() {
+                return new Point(1, 1);
+            }
+
+            @Override
+            public Texture getTexture() {
+                Texture t = mock(Texture.class);
+                when(t.getHeight()).thenReturn(1);
+                return t;
+            }
+        });
+        hud.addHudElement(new IHUDElement() {
+            @Override
+            public Point getPosition() {
+                return new Point(1, 1);
+            }
+
+            @Override
+            public Texture getTexture() {
+                Texture t = mock(Texture.class);
+                when(t.getHeight()).thenReturn(1);
+                return t;
+            }
+        });
+        try (MockedConstruction<Sprite> mSprite = mockConstruction(Sprite.class)) {
+            hud.drawElements();
+            assertEquals(3, mSprite.constructed().size());
+            verify(mSprite.constructed().get(0)).draw(mBatch);
+            verify(mSprite.constructed().get(1)).draw(mBatch);
+            verify(mSprite.constructed().get(2)).draw(mBatch);
+        }
+        verify(mBatch, times(3)).begin();
+        verify(mBatch, times(3)).end();
     }
 }

@@ -29,13 +29,6 @@ public class HUD {
         hudElements = new ArrayList<>();
     }
 
-    //ONLY FOR TEST PURPOSES!
-    public HUD(SpriteBatch hudBatch, OrthographicCamera hudCamera) {
-        this.hudBatch = hudBatch;
-        this.hudCamera = hudCamera;
-        this.hudElements = new ArrayList<>();
-    }
-
     /**
      * Toogle between grid and pixel based system
      *

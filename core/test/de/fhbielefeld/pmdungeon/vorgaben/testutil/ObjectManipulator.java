@@ -20,9 +20,23 @@ public class ObjectManipulator {
      */
     public static void overrrideFinalAttribute(Object classInstance, String fieldName, Object newValue)
             throws NoSuchFieldException, IllegalAccessException {
-        final Field field = classInstance.getClass().getDeclaredField(fieldName);
+        Field field;
+        try {
+            field = classInstance.getClass().getDeclaredField(fieldName);
+        } catch (NoSuchFieldException e) {
+            field = searchFieldInSuperClassRek(classInstance.getClass(), fieldName);
+        }
         field.setAccessible(true);
         field.set(classInstance, newValue);
     }
 
+    private static Field searchFieldInSuperClassRek(Class clazz, String fieldName) throws NoSuchFieldException {
+        Field field;
+        try {
+            field = clazz.getSuperclass().getDeclaredField(fieldName);
+        } catch (NoSuchFieldException e) {
+            field = searchFieldInSuperClassRek(clazz.getSuperclass(), fieldName);
+        }
+        return field;
+    }
 }
