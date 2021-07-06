@@ -30,6 +30,14 @@ public class ObjectManipulator {
         field.set(classInstance, newValue);
     }
 
+    /**
+     * Search an attribute in all super classes.
+     *
+     * @param clazz     actual class to search the field in.
+     * @param fieldName The name of the field which should be change.
+     * @return The searched field.
+     * @throws NoSuchFieldException Will be thrown if the field can not be found in class or super classes.
+     */
     private static Field searchFieldInSuperClassRek(Class clazz, String fieldName) throws NoSuchFieldException {
         Field field;
         try {
