@@ -24,6 +24,7 @@ public class IAnimatableTest {
         MockitoAnnotations.openMocks(this).close();
     }
 
+    // ID 37.1
     @Test
     public void testGetTexture() {
         when(animation.getNextAnimationTexture()).thenReturn(texture);

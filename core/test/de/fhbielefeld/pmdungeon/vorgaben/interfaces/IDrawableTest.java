@@ -40,6 +40,7 @@ public class IDrawableTest {
         };
     }
 
+    // ID: 38.1
     @Test
     public void testDrawWithFourParameter() {
         try (MockedStatic<GameSetup> mGameSetup = mockStatic(GameSetup.class)) {
@@ -51,6 +52,7 @@ public class IDrawableTest {
         verify(spriteBatch).end();
     }
 
+    // ID: 38.2
     @Test
     public void testDrawWithoutParameter() {
         try (MockedStatic<GameSetup> mGameSetup = mockStatic(GameSetup.class)) {
@@ -62,6 +64,7 @@ public class IDrawableTest {
         verify(spriteBatch).end();
     }
 
+    // ID: 38.3
     @Test
     public void testDrawWithTwoParameter() {
         try (MockedStatic<GameSetup> mGameSetup = mockStatic(GameSetup.class)) {
@@ -73,6 +76,7 @@ public class IDrawableTest {
         verify(spriteBatch).end();
     }
 
+    // ID: 38.4
     @Test
     public void testDrawWithScalings() {
         try (MockedStatic<GameSetup> mGameSetup = mockStatic(GameSetup.class)) {

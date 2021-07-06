@@ -37,12 +37,14 @@ public class IHUDElementTest {
             }
         };
     }
-    
+
+    // ID 39.1
     @Test
     public void testGetWidth() {
         assertEquals(0.5, ihudElement.getWidth(), DELTA);
     }
 
+    // ID 40.1
     @Test
     public void testGetHeight() {
         assertEquals(2.0, ihudElement.getHeight(), DELTA);
