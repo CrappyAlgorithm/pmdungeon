@@ -4,22 +4,21 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
+import de.fhbielefeld.pmdungeon.vorgaben.dungeonCreator.dungeonconverter.DungeonConverter;
 import de.fhbielefeld.pmdungeon.vorgaben.game.GameSetup;
 import de.fhbielefeld.pmdungeon.vorgaben.graphic.HUD;
 import de.fhbielefeld.pmdungeon.vorgaben.graphic.TextStage;
+import de.fhbielefeld.pmdungeon.vorgaben.testutil.ObjectManipulator;
 import de.fhbielefeld.pmdungeon.vorgaben.tools.DungeonCamera;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockedStatic;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 
 import java.lang.reflect.InvocationTargetException;
 
 import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyFloat;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
@@ -57,28 +56,39 @@ public class MainControllerTest {
     }
 
     // ID 15.1
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testFirstFrameFinishedSetupTrue() throws InvocationTargetException, IllegalAccessException {
         mMainController.finishedSetup = true;
-        mMainController.firstFrame();
         doCallRealMethod().when(mMainController).firstFrame();
-        mMainController.firstFrame();
-
+        try (MockedConstruction<DungeonConverter> mDungeonConverter = mockConstruction(DungeonConverter.class,
+                (mock, context) -> {
+                    // possible to set additional stubbing
+                })) {
+            mMainController.firstFrame();
+        }
         verify(mLevelController).loadDungeon(any());
-        assertEquals(false, mMainController.firstFrame);
+        assertFalse(mMainController.firstFrame);
+
     }
 
     // ID 15.2
-    @Test(expected = UnsatisfiedLinkError.class)
+    @Test
     public void testFirstFrameFinishedSetupFalse() throws InvocationTargetException, IllegalAccessException {
         mMainController.finishedSetup = false;
         mMainController.firstFrame();
         doCallRealMethod().when(mMainController).firstFrame();
         Gdx.app = app;
-
-        mMainController.firstFrame();
-        assertEquals(true, mMainController.finishedSetup);
-        assertEquals(false, mMainController.firstFrame);
+        try (MockedConstruction<DungeonConverter> mDungeonConverter = mockConstruction(DungeonConverter.class);
+             MockedConstruction<HUD> mHUD = mockConstruction(HUD.class);
+             MockedConstruction<TextStage> mTextStage = mockConstruction(TextStage.class)) {
+            mMainController.firstFrame();
+        }
+        verify(mMainController).setupCamera();
+        verify(mMainController).setupWorldController();
+        verify(mMainController).setup();
+        verify(mLevelController).loadDungeon(any());
+        assertTrue(mMainController.finishedSetup);
+        assertFalse(mMainController.firstFrame);
     }
 
     // ID 16.1
@@ -145,10 +155,14 @@ public class MainControllerTest {
     }
 
     // ID 18.1
-    @Test(expected = UnsatisfiedLinkError.class)
+    @Test
     public void testSetupCamera() {
-        assertEquals(mDungeonCamera, mainController.camera);
-        mainController.setupCamera();
-        assertNotEquals(mDungeonCamera, mainController.camera);
+        try (MockedConstruction<DungeonCamera> mDungeonCamera = mockConstruction(DungeonCamera.class,
+                (mock, context) -> {
+                    ObjectManipulator.overrrideFinalAttribute(mock, "position", new Vector3(0, 0, 0));
+                })) {
+            mainController.setupCamera();
+            assertEquals(mDungeonCamera.constructed().get(0), mainController.camera);
+        }
     }
 }
