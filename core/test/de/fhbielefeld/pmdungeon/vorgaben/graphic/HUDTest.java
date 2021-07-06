@@ -40,9 +40,9 @@ public class HUDTest {
     public void setup() throws Exception {
         try (MockedConstruction<SpriteBatch> mSpriteBatch = mockConstruction(SpriteBatch.class);
              MockedConstruction<OrthographicCamera> mOrthographicCamera = mockConstruction(OrthographicCamera.class,
-                (mock, context) -> {
-                    ObjectManipulator.overrrideFinalAttribute(mock, "position", new Vector3(0, 0, 0));
-                })) {
+                     (mock, context) -> {
+                         ObjectManipulator.overrrideFinalAttribute(mock, "position", new Vector3(0, 0, 0));
+                     })) {
             MockitoAnnotations.openMocks(this).close();
             mBatch = mSpriteBatch.constructed().get(0);
             mCamera = mOrthographicCamera.constructed().get(0);
