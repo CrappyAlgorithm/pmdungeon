@@ -34,8 +34,6 @@ public class HUDTest {
     @InjectMocks
     HUD hud;
 
-    Vector3 v3 = new Vector3(0, 0, 0);
-
     @Before
     public void setup() throws Exception {
         try (MockedConstruction<SpriteBatch> mSpriteBatch = mockConstruction(SpriteBatch.class);
