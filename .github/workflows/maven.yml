@@ -3,16 +3,18 @@
 
 name: maven build
 
-on: [push, pull_request]
+on: [push, pull_request] 
 
 jobs:
   build:
   
+    # defines multiple os to run build script
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-18.04, ubuntu-latest, windows-2019, windows-latest, macos-10.15, macos-latest]
         
+    # setup jdk and run build
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -23,10 +25,12 @@ jobs:
     - name: Build with Maven
       run: mvn -B install --file pom.xml
       
+    # generate pmd report
     - name: Check with PMD
-      if: matrix.os == 'ubuntu-latest'
+      if: matrix.os == 'ubuntu-latest' # generate only on ubuntu-latest, since one time is enough
       run: mvn pmd:pmd --file pom.xml
-      
+    
+    # generate jacoco badge
     - name: jacoco-badge-generator
       if: matrix.os == 'ubuntu-latest'
       uses: cicirello/jacoco-badge-generator@v2.2.1
@@ -34,7 +38,8 @@ jobs:
         generate-coverage-badge: true
         generate-branches-badge: true
         jacoco-csv-file: core/target/site/jacoco/jacoco.csv
-        
+    
+    # commit the badge if it has changed
     - name: Commit and push the badge (if it changed)
       if: matrix.os == 'ubuntu-latest'
       uses: EndBug/add-and-commit@v7
@@ -43,6 +48,7 @@ jobs:
         message: 'commit badge'
         add: '*.svg'
 
+    # upload jacoco report
     - name: Upload JaCoCo coverage report
       if: matrix.os == 'ubuntu-latest'
       uses: actions/upload-artifact@v2
@@ -50,6 +56,7 @@ jobs:
         name: jacoco-report
         path: core/target/site/jacoco/
 
+    # upload pmd report
     - name: Upload PMD report
       if: matrix.os == 'ubuntu-latest'
       uses: actions/upload-artifact@v2
@@ -57,6 +64,7 @@ jobs:
         name: pmd-report
         path: core/target/site/pmd.html
 
+    # upload ubuntu jar
     - name: Upload jar with dependencys ubuntu
       if: matrix.os == 'ubuntu-latest'
       uses: actions/upload-artifact@v2
@@ -64,6 +72,7 @@ jobs:
         name: pmdungeon-ubuntu
         path: desktop/target/pmdungeon-desktop-jar-with-dependencies.jar
 
+    # upload windows jar
     - name: Upload jar with dependencys windows
       if: matrix.os == 'windows-latest'
       uses: actions/upload-artifact@v2
@@ -71,6 +80,7 @@ jobs:
         name: pmdungeon-windows
         path: desktop/target/pmdungeon-desktop-jar-with-dependencies.jar
 
+    # upload macos jar
     - name: Upload jar with dependencys macos
       if: matrix.os == 'macos-latest'
       uses: actions/upload-artifact@v2
