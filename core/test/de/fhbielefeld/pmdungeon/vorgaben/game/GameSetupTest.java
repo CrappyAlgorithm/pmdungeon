@@ -40,14 +40,14 @@ public class GameSetupTest {
         assertEquals(mainController, gameSetup.mc);
     }
 
-    // ID 35.1
+    // ID 34.2
     @Test
     public void testConstructorWithNull() {
         GameSetup gameSetup = new GameSetup(null);
         assertEquals(null, gameSetup.mc);
     }
 
-    // ID 36.1
+    // ID 35.1
     @Test
     public void testCreate() {
         GameSetup gameSetup = new GameSetup(null); // only testable with mc = null
@@ -61,7 +61,7 @@ public class GameSetupTest {
         assertNotEquals(spriteBatch, GameSetup.batch);
     }
 
-    // ID 37.1
+    // ID 36.1
     @Test
     public void testDispose() {
         GameSetup gameSetup = new GameSetup(mainController);
