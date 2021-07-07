@@ -20,6 +20,10 @@ Die erforderliche jar kann einfach über Maven erstellt werden. Hierfür kann de
 ```
 Die jar mit allen Abhängigkeiten inkludiert liegt nun unter *"desktop/target/pmdungeon-desktop-jar-with-dependencies.jar"* und kann nach belieben umbenannt werden.
 
+## Testumgebung
+
+[Nutzung der Testumgebung](Testumgebung.md#verwendung-der-testumgebung)
+
 ## Installation
 
 - Laden Sie sich das `pmdungeon.jar` und den `assets`-Ordner mit Texturen und Level-Beschreibungen herunter. Das `pmdungeon.jar` wird Ihnen als API dienen.
