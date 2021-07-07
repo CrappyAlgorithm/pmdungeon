@@ -15,7 +15,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <pmd-core.version>1.0</pmd-core.version>
+        <pmd-core.version>${project.parent.version}</pmd-core.version>
 
         <!-- Defines the dependency versions. -->
         <jdk.version>11</jdk.version>
@@ -70,6 +70,7 @@
                         <target>${jdk.version}</target>
                     </configuration>
                 </plugin>
+                <!-- Creates an independent jar. -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
@@ -89,6 +90,7 @@
                         </execution>
                     </executions>
                 </plugin>
+                <!-- Run JaCoCo at test stage and generate report. -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -136,6 +138,7 @@
                         </execution>
                     </executions>
                 </plugin>
+                <!-- Creates the pmd report. -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-pmd-plugin</artifactId>
